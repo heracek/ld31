@@ -1,9 +1,11 @@
-local Player = class("Player")
+local Entry = require "Entry"
+local Player = class("Player", Entry)
 
 Player.static.WORLD_MOVE_BORDER = 16
 Player.static.WORLD_WIDTH       = 320
 
 function Player:initialize()
+  Entry.initialize(self)
   self.x, self.y  = 0, 0
   self.xspeed     = 0
   self.move_speed = 100
