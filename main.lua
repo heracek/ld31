@@ -6,6 +6,7 @@ function love.load()
   love.graphics.setDefaultFilter('nearest')
 
   GS.registerEvents()
+  GS.switch(State.game)
 end
 
 local gamestateDraw = GS.draw
