@@ -1,12 +1,14 @@
 require "lib.TLfres"
+class = require "lib.middleclass.middleclass"
 GS = require "lib.hump.gamestate" -- GS is Gamestate
+Input = require "Input"
 
 function love.load()
   TLfres.setScreen({w=640, h=480, full=false, vsync=true, aa=0}, 320, false, false)
   love.graphics.setDefaultFilter('nearest')
 
   GS.registerEvents()
-  GS.switch(State.game)
+  GS.switch(State.game())
 end
 
 local gamestateDraw = GS.draw
@@ -20,6 +22,11 @@ function love.keypressed(key)
   if ('escape' == key or 'q' == key) then
     love.event.quit()
   end
+  Input:keypressed(key)
+end
+
+function love.keyreleased(key)
+  Input:keyreleased(key)
 end
 
 local function LazyValueTable(getValueForKeyCallback)

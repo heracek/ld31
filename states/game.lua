@@ -1,16 +1,19 @@
-local state = {}
+local Player = require "Player"
+local state = class("GameState")
 
-function state:init()
-  character = Image.characters.character01
+function state:initialize()
+  self.player = Player()
 end
 
 function state:draw()
   love.graphics.setBackgroundColor(255, 255, 255)
   love.graphics.clear()
 
-  love.graphics.draw(character, 0, 0)
+  self.player:draw()
+end
 
-  love.graphics.print("Hello World!", 150, 220)
+function state:update(dt)
+  self.player:update(dt)
 end
 
 return state
