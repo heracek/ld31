@@ -1,7 +1,8 @@
 local Entry = class("Entry")
 
 function Entry:initialize()
-  self.scene = nil
+  self.scene  = nil
+  self.zindex = 0
 end
 
 function Entry:update(dt)

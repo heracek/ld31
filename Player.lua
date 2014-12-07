@@ -7,6 +7,7 @@ Player.static.WORLD_WIDTH       = 320
 function Player:initialize()
   Entry.initialize(self)
   self.x, self.y  = 0, 0
+  self.zindex     = 100
   self.xspeed     = 0
   self.move_speed = 100
 

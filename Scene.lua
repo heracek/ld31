@@ -6,6 +6,9 @@ end
 
 function Scene:addEntry(entry)
   table.insert(self._entries, entry)
+  table.sort(self._entries, function(entry_a, entry_b)
+    return entry_a.zindex < entry_b.zindex
+  end)
   entry:setScene(self)
   return entry
 end

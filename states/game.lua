@@ -1,16 +1,15 @@
 local Scene = require "Scene"
 local Player = require "Player"
+local World = require "World"
 local state = class("GameState")
 
 function state:initialize()
   self.scene = Scene()
   self.scene:addEntry(Player())
+  self.scene:addEntry(World())
 end
 
 function state:draw()
-  love.graphics.setBackgroundColor(255, 255, 255)
-  love.graphics.clear()
-
   self.scene:draw()
 end
 
