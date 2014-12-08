@@ -6,6 +6,7 @@ Input = require "Input"
 function love.load()
   TLfres.setScreen({w=640, h=480, full=false, vsync=true, aa=0}, 320, false, false)
   love.graphics.setDefaultFilter('nearest')
+  love.graphics.setLineStyle('rough')
 
   GS.registerEvents()
   GS.switch(State.game())

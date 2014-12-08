@@ -2,10 +2,8 @@ local Entry = require "Entry"
 local World = require "World"
 local Player = class("Player", Entry)
 
-Player.static.WORLD_MOVE_BORDER = 16
-Player.static.WORLD_WIDTH       = 320
-Player.static.GRAVITY           = 600
-Player.static.MAX_FALL_SPEED    = 200
+Player.static.GRAVITY        = 600
+Player.static.MAX_FALL_SPEED = 200
 
 function Player:initialize()
   Entry.initialize(self)
@@ -13,6 +11,8 @@ function Player:initialize()
   self.name       = 'player'
 
   self.x, self.y  = 10, 10
+  self.width      = 16
+  self.height     = 32
   self.xspeed     = 0
   self.yspeed     = 0
   self.move_speed = 100
@@ -22,6 +22,7 @@ function Player:initialize()
 end
 
 function Player:update(dt)
+  local oldX, oldY = self.x, self.y
   if nil == self.world then
     self.world = self.scene:findEntryWithName(World.DEFAULT_NAME)
   end
@@ -33,15 +34,18 @@ function Player:update(dt)
     self.xspeed = - self.move_speed
   end
 
-  self.x = self.x + self.xspeed * dt
-  self.x = math.max(0, math.min(Player.WORLD_WIDTH - Player.WORLD_MOVE_BORDER, self.x))
-
   self.yspeed = self.yspeed + Player.GRAVITY * dt
   self.yspeed = math.min(Player.MAX_FALL_SPEED, self.yspeed)
   self.y = self.y + self.yspeed * dt
+  if self.world:isInCollisionWith(self.x, self.y, self.width, self.height) then
+    self.y = oldY
+    self.yspeed = self.yspeed / 2
+  end
 
-  -- ground collision
-  self.y = math.min(100, self.y)
+  self.x = self.x + self.xspeed * dt
+  if self.world:isInCollisionWith(self.x, self.y, self.width, self.height) then
+    self.x = oldX
+  end
 end
 
 function Player:draw()
