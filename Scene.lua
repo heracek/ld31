@@ -25,4 +25,13 @@ function Scene:draw()
   end
 end
 
+function Scene:findEntryWithName(name)
+  for _, entry in ipairs(self._entries) do
+    if entry.name == name then
+      return entry
+    end
+  end
+  return nil
+end
+
 return Scene

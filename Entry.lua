@@ -3,6 +3,7 @@ local Entry = class("Entry")
 function Entry:initialize()
   self.scene  = nil
   self.zindex = 0
+  self.name   = nil
 end
 
 function Entry:update(dt)

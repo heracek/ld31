@@ -4,6 +4,7 @@ local World = class("World", Entry)
 function World:initialize()
   Entry.initialize(self)
   self.zindex = 0
+  self.name   = World.DEFAULT_NAME
 end
 
 function World:draw()

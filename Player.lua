@@ -1,4 +1,5 @@
 local Entry = require "Entry"
+local World = require "World"
 local Player = class("Player", Entry)
 
 Player.static.WORLD_MOVE_BORDER = 16
@@ -8,16 +9,23 @@ Player.static.MAX_FALL_SPEED    = 200
 
 function Player:initialize()
   Entry.initialize(self)
-  self.x, self.y  = 0, 0
   self.zindex     = 100
+  self.name       = 'player'
+
+  self.x, self.y  = 10, 10
   self.xspeed     = 0
   self.yspeed     = 0
   self.move_speed = 100
+  self.world      = nil
 
   self.sprite = Image.characters.character01
 end
 
 function Player:update(dt)
+  if nil == self.world then
+    self.world = self.scene:findEntryWithName(World.DEFAULT_NAME)
+  end
+
   self.xspeed = 0
   if Input:isDown("d") then
     self.xspeed = self.move_speed
