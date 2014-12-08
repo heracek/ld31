@@ -5,6 +5,11 @@ local Player = class("Player", Entry)
 Player.static.GRAVITY        = 600
 Player.static.JUMP_SPEED     = 200
 Player.static.MAX_FALL_SPEED = 200
+Player.static.KEYS = {
+  JUMP  = "w",
+  LEFT  = "a",
+  RIGHT = "d",
+}
 
 function Player:initialize()
   Entry.initialize(self)
@@ -29,13 +34,13 @@ function Player:update(dt)
   end
 
   self.xspeed = 0
-  if Input:isDown("d") then
+  if Input:isDown(self.class.KEYS.RIGHT) then
     self.xspeed = self.move_speed
-  elseif Input:isDown("a") then
+  elseif Input:isDown(self.class.KEYS.LEFT) then
     self.xspeed = - self.move_speed
   end
 
-  if Input:wasPressed("w") then
+  if Input:wasPressed(self.class.KEYS.JUMP) then
     self.yspeed = -self.class.JUMP_SPEED
   end
 
