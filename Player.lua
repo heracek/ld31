@@ -23,6 +23,7 @@ function Player:initialize()
   self.yspeed     = 0
   self.move_speed = 100
   self.world      = nil
+  self.grounded   = false
 
   self.sprite = Image.characters.character01
 end
@@ -40,7 +41,7 @@ function Player:update(dt)
     self.xspeed = - self.move_speed
   end
 
-  if Input:wasPressed(self.class.KEYS.JUMP) then
+  if Input:wasPressed(self.class.KEYS.JUMP) and self.grounded then
     self.yspeed = -self.class.JUMP_SPEED
   end
 
@@ -50,6 +51,9 @@ function Player:update(dt)
   if self.world:isInCollisionWith(self.x, self.y, self.width, self.height) then
     self.y = oldY
     self.yspeed = self.yspeed / 2
+    self.grounded = true
+  else
+    self.grounded = false
   end
 
   self.x = self.x + self.xspeed * dt
