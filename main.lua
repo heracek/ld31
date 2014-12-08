@@ -15,7 +15,11 @@ end
 local gamestateDraw = GS.draw
 GS.draw = function()
   TLfres.transform()
+
+  Input:resetAllPressedKeys()
+
   gamestateDraw()
+
   TLfres.letterbox(4,3)
 end
 

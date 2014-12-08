@@ -3,6 +3,7 @@ local World = require "World"
 local Player = class("Player", Entry)
 
 Player.static.GRAVITY        = 600
+Player.static.JUMP_SPEED     = 200
 Player.static.MAX_FALL_SPEED = 200
 
 function Player:initialize()
@@ -32,6 +33,10 @@ function Player:update(dt)
     self.xspeed = self.move_speed
   elseif Input:isDown("a") then
     self.xspeed = - self.move_speed
+  end
+
+  if Input:wasPressed("w") then
+    self.yspeed = -self.class.JUMP_SPEED
   end
 
   self.yspeed = self.yspeed + Player.GRAVITY * dt
