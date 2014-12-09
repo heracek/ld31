@@ -13,4 +13,12 @@ function Tile:draw()
   love.graphics.rectangle("fill", self.x, self.y, self.width, self.height)
 end
 
+function Tile:isInCollisionWith(x, y, w, h)
+  if x + w > self.x and x < self.x + self.width and
+     y + h > self.y and y < self.y + self.height then
+     return true
+   end
+  return false
+end
+
 return Tile

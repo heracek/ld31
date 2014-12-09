@@ -52,7 +52,11 @@ function World:draw()
 end
 
 function World:isInCollisionWith(x, y, w, h)
-  if (y + h) >= 100 then return true end
+  for _,tile in ipairs(self._tiles) do
+    if tile:isInCollisionWith(x, y, w, h) then
+      return true
+    end
+  end
   if x < 0 then return true end
   if (x + w) > self.class.WORLD_WIDTH then return true end
   return false
