@@ -1,5 +1,5 @@
 function love.conf(t)
-  t.window.title  = 'LD31'
+  t.window.title  = 'game of void'
   t.author        = 'heracek'
   t.url           = 'http://github.com/heracek/ld31'
   t.identity      = 'heracek-ld31'
